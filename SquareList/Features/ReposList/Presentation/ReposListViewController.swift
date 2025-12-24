@@ -150,11 +150,11 @@ final class ReposListViewController: UIViewController {
             retryButton.isHidden = true
             emptyStack.isHidden = false
 
-        case .failure(let message):
+        case .failure(let error):
             loader.stopAnimating()
             refreshControl.endRefreshing()
             footerSpinner.stopAnimating()
-            messageLabel.text = message
+            messageLabel.text = error.message
             retryButton.isHidden = false
             emptyStack.isHidden = false
         }
@@ -175,7 +175,7 @@ extension ReposListViewController: UITableViewDelegate {
         let contentHeight = scrollView.contentSize.height
         let frameHeight = scrollView.frame.size.height
 
-        // Когда дошли почти до низа — догружаем.
+        // Когда дошли почти до низа догружаем
         if offsetY > contentHeight - frameHeight - 200 {
             footerSpinner.startAnimating()
             Task { [weak self] in

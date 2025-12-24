@@ -8,10 +8,11 @@
 
 import Foundation
 
-enum NetworkError: Error, Equatable {
+enum NetworkError: Error {
     case invalidURL
-    case transportError(String)
-    case serverError(statusCode: Int)
-    case decodingError(String)
-    case emptyResponse
+    case transport(Error)
+    case server(statusCode: Int)
+    case decoding(Error)
+    case noData
 }
+

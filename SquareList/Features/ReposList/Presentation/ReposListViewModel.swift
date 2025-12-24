@@ -66,7 +66,7 @@ final class ReposListViewModel {
         let result = await repository.fetchSquareRepos(page: page, perPage: perPage)
         switch result {
         case .failure(let error):
-            state = .failure(message: Self.humanReadable(error))
+            state = .failure(mapToUserError(error))
         case .success(let newRepos):
             if page == 1, newRepos.isEmpty {
                 state = .empty
@@ -87,18 +87,17 @@ final class ReposListViewModel {
         }
     }
 
-    private static func humanReadable(_ error: NetworkError) -> String {
+    private func mapToUserError(_ error: NetworkError) -> UserFacingError {
         switch error {
-        case .invalidURL:
-            return "Invalid URL."
-        case .transportError(let message):
-            return "Network error: \(message)"
-        case .serverError(let statusCode):
-            return "Server error. Status code: \(statusCode)"
-        case .decodingError:
-            return "Failed to parse server response."
-        case .emptyResponse:
-            return "Empty response from server."
+        case .transport:
+            return .noInternet
+        case .server(let code) where code == 401:
+            return .unauthorized
+        case .server:
+            return .serverUnavailable
+        default:
+            return .unknown
         }
     }
+
 }

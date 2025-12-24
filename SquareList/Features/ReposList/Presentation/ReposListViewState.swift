@@ -13,5 +13,5 @@ enum ReposListViewState: Equatable {
     case loading
     case content
     case empty
-    case failure(message: String)
+    case failure(UserFacingError)
 }

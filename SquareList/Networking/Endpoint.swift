@@ -8,32 +8,31 @@
 
 import Foundation
 
-struct Endpoint {
-    let path: String
-    var queryItems: [URLQueryItem] = []
-    var headers: [String: String] = [:]
+enum GitHubEndpoint: APIEndpoint {
+    case squareRepos(page: Int, perPage: Int)
 
-    func makeRequest() -> Result<URLRequest, NetworkError> {
-        var components = URLComponents()
-        components.scheme = "https"
-        components.host = "api.github.com"
-        components.path = path
-        components.queryItems = queryItems.isEmpty ? nil : queryItems
-
-        guard let url = components.url else { return .failure(.invalidURL) }
-
-        var request = URLRequest(url: url)
-        request.httpMethod = "GET"
-
-        headers.forEach { key, value in
-            request.setValue(value, forHTTPHeaderField: key)
+    var path: String {
+        switch self {
+        case .squareRepos:
+            return "/orgs/square/repos"
         }
+    }
 
-        // GitHub иногда просит явно Accept, пусть будет.
-        if request.value(forHTTPHeaderField: "Accept") == nil {
-            request.setValue("application/vnd.github+json", forHTTPHeaderField: "Accept")
+    var method: HTTPMethod {
+        .get
+    }
+
+    var queryItems: [URLQueryItem] {
+        switch self {
+        case let .squareRepos(page, perPage):
+            return [
+                URLQueryItem(name: "page", value: String(page)),
+                URLQueryItem(name: "per_page", value: String(perPage))
+            ]
         }
+    }
 
-        return .success(request)
+    var headers: [String : String] {
+        ["Accept": "application/vnd.github+json"]
     }
 }

@@ -32,7 +32,7 @@ enum TestDataFactory {
         }
     }
 
-    // MARK: - DTO JSON (for API layer tests)
+    // MARK: - DTO JSON
 
     static func reposJSON(
         items: [(id: Int, name: String, description: String?)]
