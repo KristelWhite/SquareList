@@ -33,17 +33,29 @@
 		63DD49A82EFAADD000D88C7E /* Exceptions for "SquareList" folder in "SquareList" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				"Features/ReposList/Presentation/Shared/UserFacingError+UI.swift",
 				Info.plist,
 			);
 			target = 63DD497F2EFAADCF00D88C7E /* SquareList */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
+/* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+		63DD4A122EFD61D900D88C7E /* Exceptions for "SquareList" folder in "Copy Bundle Resources" phase from "SquareList" target */ = {
+			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
+			buildPhase = 63DD497E2EFAADCF00D88C7E /* Resources */;
+			membershipExceptions = (
+				"Features/ReposList/Presentation/Shared/UserFacingError+UI.swift",
+			);
+		};
+/* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		63DD49822EFAADCF00D88C7E /* SquareList */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				63DD49A82EFAADD000D88C7E /* Exceptions for "SquareList" folder in "SquareList" target */,
+				63DD4A122EFD61D900D88C7E /* Exceptions for "SquareList" folder in "Copy Bundle Resources" phase from "SquareList" target */,
 			);
 			path = SquareList;
 			sourceTree = "<group>";
