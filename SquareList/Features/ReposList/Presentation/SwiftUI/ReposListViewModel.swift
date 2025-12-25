@@ -24,6 +24,9 @@ final class ReposListViewModel: ObservableObject {
     private let perPage: Int = 30
     private var isLoadingPage = false
     private var canLoadMore = true
+    
+    private let minimumSkeletonDuration: UInt64 = 350_000_000 // 350 ms
+    private var loadStartTime: UInt64?
 
     init(repository: ReposRepository) {
         self.repository = repository
@@ -31,6 +34,8 @@ final class ReposListViewModel: ObservableObject {
     }
 
     func loadInitial() async {
+        loadStartTime = DispatchTime.now().uptimeNanoseconds
+        
         state = .loading
         repos.removeAll()
         page = 1
@@ -41,12 +46,13 @@ final class ReposListViewModel: ObservableObject {
     }
 
     func refresh() async {
-        repos.removeAll()
+        loadStartTime = nil
+        
         page = 1
         canLoadMore = true
         syncRenderStateLoadingForRefreshIfNeeded()
 
-        await loadNextPageInternal()
+        await loadNextPageInternal(isRefresh: true)
     }
 
     func loadNextPageIfNeeded(currentIndex: Int) async {
@@ -67,24 +73,26 @@ final class ReposListViewModel: ObservableObject {
 
 private extension ReposListViewModel {
 
-    func loadNextPageInternal() async {
+    func loadNextPageInternal(isRefresh: Bool = false) async {
         guard !isLoadingPage, canLoadMore else { return }
         isLoadingPage = true
         defer { isLoadingPage = false }
 
         let result = await repository.fetchSquareRepos(page: page, perPage: perPage)
-
+        
+        await waitIfNeededForSkeleton()
+        
         switch result {
         case .failure(let error):
             state = .failure(mapToUserError(error))
             syncRenderState()
 
         case .success(let newRepos):
-            applySuccessPage(newRepos)
+            applySuccessPage(newRepos, isRefresh: isRefresh)
         }
     }
 
-    func applySuccessPage(_ newRepos: [Repo]) {
+    func applySuccessPage(_ newRepos: [Repo], isRefresh: Bool) {
         if page == 1, newRepos.isEmpty {
             state = .empty
             repos = []
@@ -97,7 +105,9 @@ private extension ReposListViewModel {
         } else {
             page += 1
         }
-
+        if isRefresh {
+            repos = []
+        }
         repos.append(contentsOf: newRepos)
         state = .content
         syncRenderState()
@@ -138,4 +148,18 @@ private extension ReposListViewModel {
             return .unknown
         }
     }
+    
+    //синхранизация времени шимера
+    func waitIfNeededForSkeleton() async {
+        guard let start = loadStartTime else { return }
+
+        let elapsed = DispatchTime.now().uptimeNanoseconds - start
+        if elapsed < minimumSkeletonDuration {
+            let remaining = minimumSkeletonDuration - elapsed
+            try? await Task.sleep(nanoseconds: remaining)
+        }
+
+        loadStartTime = nil
+    }
+
 }

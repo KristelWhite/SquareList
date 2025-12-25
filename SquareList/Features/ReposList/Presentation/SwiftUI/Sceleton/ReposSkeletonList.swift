@@ -1,5 +1,5 @@
 //
-//  ReposSkeletonList 2.swift
+//  ReposSkeletonList.swift
 //  SquareList
 //
 //  Created by Кристина on 25.12.2025.

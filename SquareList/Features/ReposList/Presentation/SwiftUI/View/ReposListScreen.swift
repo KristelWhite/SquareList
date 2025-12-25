@@ -22,6 +22,7 @@ struct ReposListScreen: View {
         content
             .navigationTitle("Square Repos")
             .task { await viewModel.loadInitial() }
+            .animation(.easeInOut(duration: 0.2), value: viewModel.renderState)
     }
 
     @ViewBuilder
@@ -29,6 +30,7 @@ struct ReposListScreen: View {
         switch viewModel.renderState {
         case .loading:
             ReposSkeletonList(count: 10)
+                .transition(.opacity)
 
         case .content(let repos):
             reposList(repos)
@@ -40,6 +42,7 @@ struct ReposListScreen: View {
                 ? .init(title: "Retry") { Task { await viewModel.retry() } }
                 : nil
             )
+            .transition(.opacity)
         }
     }
 
