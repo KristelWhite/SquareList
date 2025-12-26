@@ -32,7 +32,7 @@ struct ShimmerModifier: ViewModifier {
             )
             .rotationEffect(.degrees(18))
             .offset(x: phase * width)
-            .blendMode(.plusLighter)
+            .blendMode(.luminosity)
         }
     }
 

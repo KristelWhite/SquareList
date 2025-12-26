@@ -53,6 +53,7 @@ struct ReposListScreen: View {
                     path.append(AppRoute.repoDetails(repo))
                 } label: {
                     RepoRowView(repo: repo)
+                        .contentShape(Rectangle())
                 }
                 .buttonStyle(.plain)
                 .task { await viewModel.loadNextPageIfNeeded(currentIndex: index) }
@@ -60,5 +61,28 @@ struct ReposListScreen: View {
         }
         .listStyle(.plain)
         .refreshable { await viewModel.refresh() }
+        .safeAreaInset(edge: .bottom) {
+            if viewModel.isLoadingNextPage {
+                HStack {
+                    Spacer()
+                    ProgressView()
+                    Spacer()
+                }
+                .padding(.vertical, 10)
+                .background(.clear)
+            }
+        }
     }
+    
+    private var footerLoader: some View {
+        HStack {
+            Spacer()
+            ProgressView()
+                .scaleEffect(0.9)
+            Spacer()
+        }
+        .padding(.vertical, 12)
+        .listRowSeparator(.hidden)
+    }
+
 }

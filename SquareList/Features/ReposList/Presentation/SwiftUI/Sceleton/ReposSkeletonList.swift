@@ -17,6 +17,7 @@ struct ReposSkeletonList: View {
                 .listRowSeparator(.hidden)
         }
         .listStyle(.plain)
+        .accessibilityHidden(true)
     }
 }
 
@@ -35,6 +36,7 @@ private struct ReposSkeletonRow: View {
                 .opacity(0.6)
         }
         .padding(.vertical, 10)
+        .foregroundStyle(Color.secondary.opacity(0.5))
         .redacted(reason: .placeholder)
         .shimmer()
     }

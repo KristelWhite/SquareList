@@ -14,6 +14,7 @@ import Foundation
 final class ReposListViewModel: ObservableObject {
 
     @Published private(set) var renderState: ReposListRenderState = .loading
+    @Published private(set) var isLoadingNextPage: Bool = false
 
     private let repository: ReposRepository
 
@@ -25,8 +26,9 @@ final class ReposListViewModel: ObservableObject {
     private var isLoadingPage = false
     private var canLoadMore = true
     
-    private let minimumSkeletonDuration: UInt64 = 350_000_000 // 350 ms
+    private let minimumSkeletonDuration: UInt64 = 800_000_000
     private var loadStartTime: UInt64?
+    
 
     init(repository: ReposRepository) {
         self.repository = repository
@@ -76,7 +78,14 @@ private extension ReposListViewModel {
     func loadNextPageInternal(isRefresh: Bool = false) async {
         guard !isLoadingPage, canLoadMore else { return }
         isLoadingPage = true
-        defer { isLoadingPage = false }
+        defer {
+            isLoadingPage = false
+            isLoadingNextPage = false
+        }
+        
+        if page > 1 {
+            isLoadingNextPage = true
+        }
 
         let result = await repository.fetchSquareRepos(page: page, perPage: perPage)
         
@@ -105,6 +114,7 @@ private extension ReposListViewModel {
         } else {
             page += 1
         }
+        print("page:", page, "received:", newRepos.count, "canLoadMore:", canLoadMore, "isLoadingNextPage", isLoadingNextPage)
         if isRefresh {
             repos = []
         }

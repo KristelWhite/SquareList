@@ -47,5 +47,6 @@ struct StateView: View {
         }
         .frame(maxWidth: .infinity)
         .padding()
+        .accessibilityElement(children: .combine)
     }
 }
