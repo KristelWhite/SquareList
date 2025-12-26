@@ -9,5 +9,10 @@
 import Foundation
 
 protocol ReposRepository {
-    func fetchSquareRepos(page: Int, perPage: Int) async -> Result<[Repo], NetworkError>
+    func fetchSquareRepos(
+        page: Int,
+        perPage: Int,
+        policy: FetchPolicy
+    ) async -> Result<[Repo], NetworkError>
 }
+

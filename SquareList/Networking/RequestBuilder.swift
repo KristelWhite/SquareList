@@ -7,13 +7,22 @@
 
 import Foundation
 
+import Foundation
+
 struct RequestBuilder {
 
     private let host = "api.github.com"
     private let scheme = "https"
 
-    func makeRequest(from endpoint: APIEndpoint) throws -> URLRequest {
-        var components = URLComponents()
+    func makeRequest(
+        from endpoint: APIEndpoint,
+        cachePolicy: URLRequest.CachePolicy = .useProtocolCachePolicy
+    ) throws -> URLRequest {
+
+        guard var components = URLComponents() as URLComponents? else {
+            throw NetworkError.invalidURL
+        }
+
         components.scheme = scheme
         components.host = host
         components.path = endpoint.path
@@ -25,9 +34,10 @@ struct RequestBuilder {
 
         var request = URLRequest(url: url)
         request.httpMethod = endpoint.method.rawValue
+        request.cachePolicy = cachePolicy
 
-        endpoint.headers.forEach {
-            request.setValue($0.value, forHTTPHeaderField: $0.key)
+        endpoint.headers.forEach { key, value in
+            request.setValue(value, forHTTPHeaderField: key)
         }
 
         return request

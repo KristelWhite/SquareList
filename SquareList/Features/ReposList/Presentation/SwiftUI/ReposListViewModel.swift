@@ -86,8 +86,10 @@ private extension ReposListViewModel {
         if page > 1 {
             isLoadingNextPage = true
         }
+        
+        let policy: FetchPolicy = isRefresh ? .refresh : (page == 1 ? .initial : .nextPage)
 
-        let result = await repository.fetchSquareRepos(page: page, perPage: perPage)
+        let result = await repository.fetchSquareRepos(page: page, perPage: perPage, policy: policy)
         
         await waitIfNeededForSkeleton()
         
