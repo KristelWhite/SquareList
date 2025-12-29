@@ -33,29 +33,17 @@
 		63DD49A82EFAADD000D88C7E /* Exceptions for "SquareList" folder in "SquareList" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				"Features/ReposList/Presentation/Shared/UserFacingError+UI.swift",
 				Info.plist,
 			);
 			target = 63DD497F2EFAADCF00D88C7E /* SquareList */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
-/* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
-		63DD4A122EFD61D900D88C7E /* Exceptions for "SquareList" folder in "Copy Bundle Resources" phase from "SquareList" target */ = {
-			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
-			buildPhase = 63DD497E2EFAADCF00D88C7E /* Resources */;
-			membershipExceptions = (
-				"Features/ReposList/Presentation/Shared/UserFacingError+UI.swift",
-			);
-		};
-/* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
-
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		63DD49822EFAADCF00D88C7E /* SquareList */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				63DD49A82EFAADD000D88C7E /* Exceptions for "SquareList" folder in "SquareList" target */,
-				63DD4A122EFD61D900D88C7E /* Exceptions for "SquareList" folder in "Copy Bundle Resources" phase from "SquareList" target */,
 			);
 			path = SquareList;
 			sourceTree = "<group>";
@@ -124,6 +112,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 63DD49A92EFAADD000D88C7E /* Build configuration list for PBXNativeTarget "SquareList" */;
 			buildPhases = (
+				63DD4A6E2F02638100D88C7E /* SwiftLint */,
 				63DD497C2EFAADCF00D88C7E /* Sources */,
 				63DD497D2EFAADCF00D88C7E /* Frameworks */,
 				63DD497E2EFAADCF00D88C7E /* Resources */,
@@ -255,6 +244,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		63DD4A6E2F02638100D88C7E /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed. Download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		63DD497C2EFAADCF00D88C7E /* Sources */ = {

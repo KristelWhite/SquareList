@@ -5,7 +5,6 @@
 //  Created by Кристина on 25.12.2025.
 //
 
-
 import SwiftUI
 
 @main
@@ -24,4 +23,3 @@ struct SquareListApp: App {
         }
     }
 }
-

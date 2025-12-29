@@ -5,12 +5,8 @@
 //  Created by Кристина on 23.12.2025.
 //
 
-
 import Foundation
 
-import Foundation
-
-/// HTTP client backed by URLSession. Supports URLCache via injected session.
 final class URLSessionHTTPClient: HTTPClient {
 
     private let session: URLSession = URLSessionFactory.makeCachedSession()
@@ -34,4 +30,3 @@ final class URLSessionHTTPClient: HTTPClient {
         print("Cache: mem=\(cache.currentMemoryUsage) disk=\(cache.currentDiskUsage)")
     }
 }
-

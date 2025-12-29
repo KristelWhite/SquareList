@@ -5,7 +5,6 @@
 //  Created by Кристина on 23.12.2025.
 //
 
-
 import Foundation
 
 enum GitHubEndpoint: APIEndpoint {
@@ -32,7 +31,7 @@ enum GitHubEndpoint: APIEndpoint {
         }
     }
 
-    var headers: [String : String] {
+    var headers: [String: String] {
         ["Accept": "application/vnd.github+json"]
     }
 }

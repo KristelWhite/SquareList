@@ -7,8 +7,6 @@
 
 import Foundation
 
-import Foundation
-
 struct RequestBuilder {
 
     private let host = "api.github.com"

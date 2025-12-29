@@ -1,0 +1,40 @@
+disabled_rules:
+  - trailing_whitespace
+  - force_cast
+  - force_try
+
+opt_in_rules:
+  - empty_count
+  - closure_spacing
+  - explicit_init
+  - first_where
+  - sorted_imports
+  - weak_delegate
+  - private_outlet
+  - multiline_arguments
+
+line_length:
+  warning: 120
+  ignores_comments: true
+  ignores_urls: true
+
+type_body_length:
+  warning: 300
+
+file_length:
+  warning: 500
+
+function_body_length:
+  warning: 60
+
+identifier_name:
+  min_length: 2
+  excluded:
+    - id
+    - vm
+    - ui
+
+excluded:
+  - Pods
+  - DerivedData
+  - .build

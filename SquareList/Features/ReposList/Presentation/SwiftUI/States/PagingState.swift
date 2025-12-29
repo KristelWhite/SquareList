@@ -5,7 +5,6 @@
 //  Created by Кристина on 26.12.2025.
 //
 
-
 import Foundation
 
 /// Paging state holder for list screens.

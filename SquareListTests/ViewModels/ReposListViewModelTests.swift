@@ -5,9 +5,8 @@
 //  Created by Кристина on 23.12.2025.
 //
 
-
-import XCTest
 @testable import SquareList
+import XCTest
 
 @MainActor
 final class ReposListViewModelTests: XCTestCase {

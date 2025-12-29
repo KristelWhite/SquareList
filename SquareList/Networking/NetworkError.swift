@@ -5,7 +5,6 @@
 //  Created by Кристина on 23.12.2025.
 //
 
-
 import Foundation
 
 enum NetworkError: Error {
@@ -15,4 +14,3 @@ enum NetworkError: Error {
     case decoding(Error)
     case noData
 }
-

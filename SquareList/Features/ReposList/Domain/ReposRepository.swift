@@ -5,7 +5,6 @@
 //  Created by Кристина on 23.12.2025.
 //
 
-
 import Foundation
 
 protocol ReposRepository {
@@ -15,4 +14,3 @@ protocol ReposRepository {
         policy: FetchPolicy
     ) async -> Result<[Repo], NetworkError>
 }
-

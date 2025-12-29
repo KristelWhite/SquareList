@@ -5,7 +5,6 @@
 //  Created by Кристина on 25.12.2025.
 //
 
-
 import Foundation
 
 /// ViewModel for repos list with pagination.
@@ -29,7 +28,6 @@ final class ReposListViewModel: ObservableObject {
     private let minimumSkeletonDuration: UInt64 = 500_000_000
     private var loadStartTime: UInt64?
     
-
     init(repository: ReposRepository) {
         self.repository = repository
         syncRenderState()
@@ -161,7 +159,7 @@ private extension ReposListViewModel {
         }
     }
     
-    //синхранизация времени шимера
+    // синхранизация времени шимера
     func waitIfNeededForSkeleton() async {
         guard let start = loadStartTime else { return }
 
