@@ -16,7 +16,7 @@ struct RequestBuilder {
 
     func makeRequest(
         from endpoint: APIEndpoint,
-        cachePolicy: URLRequest.CachePolicy = .useProtocolCachePolicy
+        cachePolicy: URLRequest.CachePolicy 
     ) throws -> URLRequest {
 
         guard var components = URLComponents() as URLComponents? else {

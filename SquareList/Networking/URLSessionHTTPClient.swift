@@ -13,11 +13,7 @@ import Foundation
 /// HTTP client backed by URLSession. Supports URLCache via injected session.
 final class URLSessionHTTPClient: HTTPClient {
 
-    private let session: URLSession
-
-    init(session: URLSession = URLSessionFactory.makeCachedSession()) {
-        self.session = session
-    }
+    private let session: URLSession = URLSessionFactory.makeCachedSession()
 
     func send(_ request: URLRequest) async -> Result<(Data, HTTPURLResponse), NetworkError> {
         do {

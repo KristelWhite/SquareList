@@ -26,7 +26,7 @@ final class ReposListViewModel: ObservableObject {
     private var isLoadingPage = false
     private var canLoadMore = true
     
-    private let minimumSkeletonDuration: UInt64 = 800_000_000
+    private let minimumSkeletonDuration: UInt64 = 500_000_000
     private var loadStartTime: UInt64?
     
 
@@ -173,5 +173,4 @@ private extension ReposListViewModel {
 
         loadStartTime = nil
     }
-
 }
