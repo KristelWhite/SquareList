@@ -14,7 +14,7 @@ final class MockHTTPClient: HTTPClient {
 
     func send(_ request: URLRequest) async -> Result<(Data, HTTPURLResponse), NetworkError> {
         guard let result else {
-            return .failure(.emptyResponse)
+            return .failure(.noData)
         }
         return result
     }

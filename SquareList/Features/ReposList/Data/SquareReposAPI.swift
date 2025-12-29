@@ -44,7 +44,7 @@ final class SquareReposAPI: ReposRepository {
 
             do {
                 let dto = try decoder.decode([GitHubRepoDTO].self, from: data)
-                return .success(dto.map(GitHubRepoMapper.map))
+                return .success(dto.map(GitHubRepoDTOToRepoMapper.map))
             } catch {
                 return .failure(.decoding(error))
             }

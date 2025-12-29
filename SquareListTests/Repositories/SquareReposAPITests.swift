@@ -24,7 +24,7 @@ final class SquareReposAPITests: XCTestCase {
         mock.result = .success((json, response))
 
         // WHEN
-        let result = await api.fetchSquareRepos(page: 1, perPage: 30)
+        let result = await api.fetchSquareRepos(page: 1, perPage: 30, policy: .initial)
 
         // THEN
         switch result {
